@@ -4,9 +4,10 @@ services:
 
   portainer:
     image: portainer/portainer-ce:latest
-   
-      
+    networks:
+      - wordpressNetwork
+
 networks:
-    wordpressNetwork:
-        driver: bridge
-        external: true
+  wordpressNetwork:
+    driver: bridge
+    external: true
