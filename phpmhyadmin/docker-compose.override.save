@@ -9,7 +9,7 @@ services:
         environment:
           PMA_HOST: db
           PMA_USER: wordpress
-          PMA_PASSWORD: apostolos
+          PMA_PASSWORD: john 
         deploy:
           resources:
             limits:
