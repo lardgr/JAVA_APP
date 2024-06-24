@@ -2,42 +2,39 @@ version: '3.4'
 
 services:
 
-  wordpress:
-    image: wordpress:latest
-    ports:
-      - '8080:80'
-    restart: always
-    volumes:
-      - '/wp_data:/var/www/html'
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: apostolos
-      WORDPRESS_DB_NAME: wordpress
-    deploy:
-      resources:
-        limits:
-          cpus: '0.10'
-          memory: '500M'
-        reservations:
-          cpus: '0.05'
-          memory: '50M'
-    networks:
-      - wordpressNetwork
-
   java-app:
     image: openjdk:11
     build: ./java-app
     ports:
-      - "8081:8081"  # Προσαρμογή της πόρτας ανάλογα με τις απαιτήσεις της εφαρμογής Java
+      - "8080:8080"  
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
     deploy:
       resources:
         limits:
           memory: 512M
-      replicas: 1  # Προσαρμογή ανάλογα με το πώς επιθυμείτε να εκτελείται η εφαρμογή Java
     networks:
-      - wordpressNetwork
+      - javaNetwork
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuserpassword
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - javaNetwork
 
 networks:
-  wordpressNetwork:
+  javaNetwork:
     driver: bridge
+
