@@ -5,9 +5,9 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     networks:
-      - wordpressNetwork
+      - javaNetwork
 
 networks:
-  wordpressNetwork:
+  javaNetwork:
     driver: bridge
     external: true
