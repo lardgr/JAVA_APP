@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+
+  java-app:
+    container_name: java-app
+    restart: always
+    volumes:
+      - '/java_data:/app'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: '500M'
+        reservations:
+          cpus: '0.05'
+          memory: '50M'
+    networks:
+      - javaNetwork
+
+  mysql:
+    container_name: mysql
+    restart: always
+    volumes:
+      - '/mysql_data:/var/lib/mysql'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: '500M'
+        reservations:
+          cpus: '0.05'
+          memory: '50M'
+    networks:
+      - javaNetwork
+
+networks:
+  javaNetwork:
+    driver: bridge
+    external: true
