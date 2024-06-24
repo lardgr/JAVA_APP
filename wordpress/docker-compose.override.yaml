@@ -2,18 +2,11 @@ version: '3.4'
 
 services:
 
-  wordpress:
-    container_name: wordpress
-    ports:
-      - '8080:80'
+  java-app:
+    container_name: java-app
     restart: always
     volumes:
-      - '/wp_data:/var/www/html'
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: apostolos
-      WORDPRESS_DB_NAME: wordpress
+      - '/java_data:/app'
     deploy:
       resources:
         limits:
@@ -23,8 +16,8 @@ services:
           cpus: '0.05'
           memory: '50M'
     networks:
-      - wordpressNetwork
+      - javaNetwork
 
 networks:
-  wordpressNetwork:
+  javaNetwork:
     driver: bridge
