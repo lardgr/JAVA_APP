@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+
+  java-app:
+    image: openjdk:11
+    build: ./java-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - javaNetwork
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: myuserpassword
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - javaNetwork
+
+networks:
+  javaNetwork:
+    driver: bridge
