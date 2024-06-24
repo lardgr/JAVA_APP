@@ -1,6 +1,7 @@
 version: '3.4'
 
-services: 
+services:
+
   portainer:
     container_name: portainer
     ports:
@@ -18,13 +19,13 @@ services:
           cpus: '0.05'
           memory: 50M
     networks:
-      - wordpressNetwork
+      - javaNetwork
 
 volumes:
   data:
     driver: local
 
 networks:
-  wordpressNetwork:
+  javaNetwork:
     driver: bridge
     external: true
