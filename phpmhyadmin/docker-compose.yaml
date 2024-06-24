@@ -4,9 +4,10 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-   
-      
+    networks:
+      - javaNetwork
+
 networks:
-    wordpressNetwork:
-        driver: bridge
-        external: true
+  javaNetwork:
+    driver: bridge
+    external: true
