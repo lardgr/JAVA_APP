@@ -1,9 +1,9 @@
 version: '3.4'
 
-services: 
+services:
+
   phpmyadmin:
     container_name: phpMyAdmin
-    image: phpmyadmin/phpmyadmin
     ports:
       - '8888:80'
     restart: always
@@ -20,9 +20,9 @@ services:
           cpus: '0.05'
           memory: 50M
     networks:
-      - wordpressNetwork
+      - javaNetwork
 
 networks:
-  wordpressNetwork:
+  javaNetwork:
     driver: bridge
     external: true
