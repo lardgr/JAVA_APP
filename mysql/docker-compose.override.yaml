@@ -3,34 +3,34 @@ version: '3.4'
 services:
 
   java-app:
-    container_name: java-app
-    restart: always
-    volumes:
-      - '/java_data:/app'
+    image: openjdk:11
+    build: ./java-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=john 
     deploy:
       resources:
         limits:
-          cpus: '0.10'
-          memory: '500M'
-        reservations:
-          cpus: '0.05'
-          memory: '50M'
+          memory: 512M
     networks:
       - javaNetwork
 
   mysql:
-    container_name: mysql
-    restart: always
-    volumes:
-      - '/mysql_data:/var/lib/mysql'
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: john 
     deploy:
       resources:
         limits:
-          cpus: '0.10'
-          memory: '500M'
-        reservations:
-          cpus: '0.05'
-          memory: '50M'
+          memory: 512M
     networks:
       - javaNetwork
 
@@ -38,3 +38,4 @@ networks:
   javaNetwork:
     driver: bridge
     external: true
+
