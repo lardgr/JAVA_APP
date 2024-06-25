@@ -9,8 +9,8 @@ services:
     restart: always
     environment:
       PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: rootpassword
+      PMA_USER: springboot
+      PMA_PASSWORD: john 
     deploy:
       resources:
         limits:
