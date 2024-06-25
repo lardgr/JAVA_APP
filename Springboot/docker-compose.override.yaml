@@ -26,7 +26,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
       MYSQL_USER: myuser
-      MYSQL_PASSWORD: root 
+      MYSQL_PASSWORD: john 
     deploy:
       resources:
         limits:
